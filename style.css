@@ -1,0 +1,464 @@
+/* ============================================ */
+/*  🎨 HABLA CORRECTO - Estilos                */
+/* ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* ============================================ */
+/*  PANTALLAS                                    */
+/* ============================================ */
+
+.pantalla {
+    display: none;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pantalla.activa {
+    display: flex;
+}
+
+.contenedor {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* ============================================ */
+/*  MENÚ PRINCIPAL                               */
+/* ============================================ */
+
+.logo {
+    font-size: 80px;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 800;
+    background: linear-gradient(90deg, #f9d423, #ff4e50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-size: 1.2em;
+    opacity: 0.8;
+    margin-bottom: 40px;
+}
+
+/* ============================================ */
+/*  BOTONES                                      */
+/* ============================================ */
+
+.btn {
+    display: inline-block;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 8px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-jugar {
+    background: linear-gradient(135deg, #f9d423, #ff4e50);
+    color: #fff;
+}
+
+.btn-instrucciones {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+}
+
+.btn-volver {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-comenzar {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: #fff;
+    font-size: 1.3em;
+    padding: 18px 50px;
+}
+
+.btn-grabar {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    font-size: 1.3em;
+    padding: 18px 50px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 65, 108, 0.4); }
+    50% { box-shadow: 0 0 0 15px rgba(255, 65, 108, 0); }
+}
+
+.btn-grabar:disabled {
+    opacity: 0.5;
+    animation: none;
+    cursor: not-allowed;
+}
+
+.btn-pista {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: #fff;
+    font-size: 0.95em;
+    padding: 12px 30px;
+}
+
+.btn-siguiente {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    margin-top: 15px;
+}
+
+.menu-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ============================================ */
+/*  INSTRUCCIONES                                */
+/* ============================================ */
+
+.instrucciones-lista {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px 0;
+}
+
+.instruccion-item {
+    padding: 10px 0;
+    font-size: 1.05em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instruccion-item:last-child {
+    border-bottom: none;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    margin: 15px 0;
+}
+
+/* ============================================ */
+/*  CONFIGURACIÓN                                */
+/* ============================================ */
+
+.config-seccion {
+    margin: 25px 0;
+}
+
+.config-seccion h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.config-opciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-nivel, .btn-rondas {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-nivel:hover, .btn-rondas:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-nivel.activo, .btn-rondas.activo {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-color: transparent;
+    transform: scale(1.05);
+}
+
+/* ============================================ */
+/*  JUEGO                                        */
+/* ============================================ */
+
+.barra-estado {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stat {
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+.palabra-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 25px;
+    padding: 40px;
+    margin: 20px 0;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.palabra-label {
+    font-size: 1em;
+    opacity: 0.7;
+}
+
+.palabra-texto {
+    font-size: 3em;
+    font-weight: 800;
+    background: linear-gradient(90deg, #f9d423, #ff4e50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 15px 0;
+}
+
+.palabra-instruccion {
+    font-size: 1em;
+    opacity: 0.7;
+}
+
+.acciones {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* ============================================ */
+/*  PISTA                                        */
+/* ============================================ */
+
+.pista-container {
+    background: rgba(240, 147, 251, 0.15);
+    border: 2px solid rgba(240, 147, 251, 0.3);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.oculto {
+    display: none;
+}
+
+/* ============================================ */
+/*  GRABANDO                                     */
+/* ============================================ */
+
+.grabando-container {
+    margin: 20px 0;
+}
+
+.grabando-animacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.circulo-grabando {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ff4b2b;
+    animation: pulseRecord 1s infinite;
+}
+
+@keyframes pulseRecord {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+#cuenta-regresiva {
+    font-size: 3em;
+    font-weight: 800;
+}
+
+/* ============================================ */
+/*  RESULTADO                                    */
+/* ============================================ */
+
+.resultado-container {
+    margin: 20px 0;
+}
+
+.resultado-card {
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.resultado-card.correcto {
+    background: rgba(56, 239, 125, 0.15);
+    border: 2px solid rgba(56, 239, 125, 0.3);
+}
+
+.resultado-card.incorrecto {
+    background: rgba(255, 75, 43, 0.15);
+    border: 2px solid rgba(255, 75, 43, 0.3);
+}
+
+#resultado-emoji {
+    font-size: 3em;
+}
+
+#resultado-texto {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+#resultado-escuche, #resultado-correcto, #resultado-puntos {
+    font-size: 1em;
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+/* ============================================ */
+/*  FIN DEL JUEGO                                */
+/* ============================================ */
+
+.fin-emoji {
+    font-size: 5em;
+    margin: 20px 0;
+    animation: bounce 2s infinite;
+}
+
+.fin-mensaje {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 30px;
+    background: linear-gradient(90deg, #f9d423, #ff4e50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.estadisticas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-icono {
+    font-size: 2em;
+}
+
+.stat-valor {
+    font-size: 1.8em;
+    font-weight: 800;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    opacity: 0.7;
+}
+
+.errores-container {
+    background: rgba(255, 75, 43, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.errores-container h3 {
+    margin-bottom: 15px;
+}
+
+.error-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95em;
+}
+
+.fin-botones {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* ============================================ */
+/*  RESPONSIVE                                   */
+/* ============================================ */
+
+@media (max-width: 600px) {
+    h1 { font-size: 2em; }
+    .palabra-texto { font-size: 2em; }
+    .estadisticas { grid-template-columns: repeat(2, 1fr); }
+    .barra-estado { font-size: 0.9em; }
+    .btn { padding: 12px 25px; font-size: 1em; }
+}
