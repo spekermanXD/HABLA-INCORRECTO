@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Habla Correcto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!--  🏠 PANTALLA: MENÚ PRINCIPAL                 -->
+    <!-- ============================================ -->
+    <div id="pantalla-menu" class="pantalla activa">
+        <div class="contenedor">
+            <div class="logo">🎓</div>
+            <h1>HABLA CORRECTO</h1>
+            <p class="subtitulo">🗣️ Practica tu pronunciación en inglés 🇬🇧</p>
+
+            <div class="menu-botones">
+                <button class="btn btn-jugar" onclick="mostrarConfiguracion()">🎮 JUGAR</button>
+                <button class="btn btn-instrucciones" onclick="mostrarInstrucciones()">📜 INSTRUCCIONES</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!--  📜 PANTALLA: INSTRUCCIONES                  -->
+    <!-- ============================================ -->
+    <div id="pantalla-instrucciones" class="pantalla">
+        <div class="contenedor">
+            <h2>📜 ¿Cómo jugar?</h2>
+            <div class="instrucciones-lista">
+                <div class="instruccion-item">1️⃣ Verás una palabra en <strong>ESPAÑOL</strong></div>
+                <div class="instruccion-item">2️⃣ Debes <strong>PRONUNCIAR</strong> su traducción en <strong>INGLÉS</strong> 🎤</div>
+                <div class="instruccion-item">3️⃣ El juego graba tu voz durante <strong>5 segundos</strong></div>
+                <div class="instruccion-item">4️⃣ Se compara lo que dijiste con la traducción correcta</div>
+                <div class="instruccion-item">5️⃣ ¡Gana <strong>puntos</strong> por cada respuesta correcta! ⭐</div>
+                <hr>
+                <div class="instruccion-item">💡 Puedes pedir una <strong>PISTA</strong> (-5 puntos)</div>
+                <div class="instruccion-item">❤️ Tienes <strong>3 VIDAS</strong> - sin vidas = Game Over</div>
+                <div class="instruccion-item">🔥 ¡Las <strong>rachas</strong> dan puntos EXTRA!</div>
+            </div>
+            <button class="btn btn-volver" onclick="mostrarMenu()">⬅️ Volver al menú</button>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!--  ⚙️ PANTALLA: CONFIGURACIÓN                  -->
+    <!-- ============================================ -->
+    <div id="pantalla-config" class="pantalla">
+        <div class="contenedor">
+            <h2>⚙️ Configuración</h2>
+
+            <div class="config-seccion">
+                <h3>Elige tu dificultad:</h3>
+                <div class="config-opciones">
+                    <button class="btn-nivel activo" data-nivel="facil" onclick="seleccionarNivel(this)">🟢 Fácil</button>
+                    <button class="btn-nivel" data-nivel="medio" onclick="seleccionarNivel(this)">🟡 Medio</button>
+                    <button class="btn-nivel" data-nivel="dificil" onclick="seleccionarNivel(this)">🔴 Difícil</button>
+                    <button class="btn-nivel" data-nivel="mixto" onclick="seleccionarNivel(this)">🌈 Mixto</button>
+                </div>
+            </div>
+
+            <div class="config-seccion">
+                <h3>¿Cuántas rondas?</h3>
+                <div class="config-opciones">
+                    <button class="btn-rondas activo" data-rondas="5" onclick="seleccionarRondas(this)">🏃 5</button>
+                    <button class="btn-rondas" data-rondas="10" onclick="seleccionarRondas(this)">🚶 10</button>
+                    <button class="btn-rondas" data-rondas="15" onclick="seleccionarRondas(this)">🏋️ 15</button>
+                </div>
+            </div>
+
+            <button class="btn btn-comenzar" onclick="iniciarJuego()">🚀 ¡COMENZAR!</button>
+            <button class="btn btn-volver" onclick="mostrarMenu()">⬅️ Volver</button>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!--  🎮 PANTALLA: JUEGO                          -->
+    <!-- ============================================ -->
+    <div id="pantalla-juego" class="pantalla">
+        <div class="contenedor">
+
+            <!-- Barra de estado -->
+            <div class="barra-estado">
+                <div class="stat">⭐ <span id="puntos-display">0</span> pts</div>
+                <div class="stat">📖 <span id="ronda-display">1/5</span></div>
+                <div class="stat" id="vidas-display">❤️ ❤️ ❤️</div>
+                <div class="stat">🔥 <span id="racha-display">0</span></div>
+            </div>
+
+            <!-- Palabra -->
+            <div class="palabra-card">
+                <p class="palabra-label">📝 Palabra en español:</p>
+                <h2 id="palabra-actual" class="palabra-texto">GATO</h2>
+                <p class="palabra-instruccion">🗣️ ¡Pronuncia la traducción en INGLÉS!</p>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="acciones">
+                <button id="btn-grabar" class="btn btn-grabar" onclick="grabarYReconocer()">
+                    🎤 GRABAR MI VOZ
+                </button>
+                <button id="btn-pista" class="btn btn-pista" onclick="pedirPista()">
+                    💡 PISTA (-5 pts)
+                </button>
+            </div>
+
+            <!-- Pista -->
+            <div id="pista-container" class="pista-container oculto">
+                <p id="pista-texto"></p>
+            </div>
+
+            <!-- Cuenta regresiva -->
+            <div id="grabando-container" class="grabando-container oculto">
+                <div class="grabando-animacion">
+                    <div class="circulo-grabando"></div>
+                    <p>🔴 GRABANDO...</p>
+                    <h3 id="cuenta-regresiva">5</h3>
+                </div>
+            </div>
+
+            <!-- Resultado -->
+            <div id="resultado-container" class="resultado-container oculto">
+                <div id="resultado-card" class="resultado-card">
+                    <h3 id="resultado-emoji"></h3>
+                    <p id="resultado-texto"></p>
+                    <p id="resultado-escuche"></p>
+                    <p id="resultado-correcto"></p>
+                    <p id="resultado-puntos"></p>
+                    <button class="btn btn-siguiente" onclick="siguienteRonda()">➡️ SIGUIENTE</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!--  🏁 PANTALLA: FIN DEL JUEGO                  -->
+    <!-- ============================================ -->
+    <div id="pantalla-fin" class="pantalla">
+        <div class="contenedor">
+            <h2>🏁 FIN DEL JUEGO</h2>
+
+            <div id="fin-emoji" class="fin-emoji">🏆</div>
+            <p id="fin-mensaje" class="fin-mensaje"></p>
+
+            <div class="estadisticas">
+                <div class="stat-card">
+                    <span class="stat-icono">⭐</span>
+                    <span class="stat-valor" id="fin-puntos">0</span>
+                    <span class="stat-label">Puntos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icono">✅</span>
+                    <span class="stat-valor" id="fin-correctas">0/0</span>
+                    <span class="stat-label">Correctas</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icono">📈</span>
+                    <span class="stat-valor" id="fin-porcentaje">0%</span>
+                    <span class="stat-label">Porcentaje</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icono">🔥</span>
+                    <span class="stat-valor" id="fin-racha">0</span>
+                    <span class="stat-label">Mejor racha</span>
+                </div>
+            </div>
+
+            <!-- Palabras para repasar -->
+            <div id="errores-container" class="errores-container oculto">
+                <h3>📝 Palabras para repasar:</h3>
+                <div id="errores-lista"></div>
+            </div>
+
+            <div class="fin-botones">
+                <button class="btn btn-jugar" onclick="mostrarConfiguracion()">🔄 JUGAR DE NUEVO</button>
+                <button class="btn btn-volver" onclick="mostrarMenu()">🏠 MENÚ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
